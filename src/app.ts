@@ -11,9 +11,8 @@ app.use(dbInstance);
 
 /*------------ Home Routes --------------*/
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/public/index.html');
+    res.sendFile(__dirname + '/public/index.html'); // Static HTML file
 });
-
 
 /* Import all Routes */
 import userRoutes from './routes/v1/userRouter';
