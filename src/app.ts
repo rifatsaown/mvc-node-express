@@ -12,7 +12,6 @@ app.use(async (req, res, next) => {
     try {
         const database = getDbConnection(); // Access the database instance directly from the request object
         (req as any).db = database; // Attach the database instance to the request object and (req as any) is used to avoid typescript error
-        console.log('Dtabase Instance Successfully Attached to the Request Object');
         next();
     } catch (error) {
         console.error('Error connecting to the database:', error);
@@ -20,12 +19,17 @@ app.use(async (req, res, next) => {
     }
 });
 
-
-/*--------------- Routes ---------------*/
+/*------------ Home Routes --------------*/
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/public/index.html');
 });
 
+
+/* Import all Routes */
+import userRoutes from './routes/v1/userRouter';
+
+/*--------------- Route MiddleWare ---------------*/
+app.use('/api/v1', userRoutes)
 
 
 export default app;
